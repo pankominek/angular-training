@@ -1,0 +1,112 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "packageManager": "yarn",
+    "schematicCollections": ["@angular-eslint/schematics"]
+  },
+  "newProjectRoot": "projects",
+  "projects": {
+    "angular-training-template": {
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "configurations": {
+            "development": {
+              "buildOptimizer": false,
+              "extractLicenses": false,
+              "namedChunks": true,
+              "optimization": false,
+              "sourceMap": true,
+              "vendorChunk": true
+            },
+            "production": {
+              "budgets": [
+                {
+                  "maximumError": "1mb",
+                  "maximumWarning": "500kb",
+                  "type": "initial"
+                },
+                {
+                  "maximumError": "4kb",
+                  "maximumWarning": "2kb",
+                  "type": "anyComponentStyle"
+                }
+              ],
+              "outputHashing": "all"
+            }
+          },
+          "defaultConfiguration": "production",
+          "options": {
+            "assets": ["src/assets", "src/favicon.ico"],
+            "index": "src/index.html",
+            "inlineStyleLanguage": "scss",
+            "main": "src/main.ts",
+            "outputPath": "dist/angular-training-template",
+            "polyfills": ["zone.js"],
+            "scripts": [],
+            "styles": ["src/styles.scss"],
+            "tsConfig": "tsconfig.app.json"
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "angular-training-template:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.html", "src/**/*.ts"]
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "angular-training-template:build:development"
+            },
+            "production": {
+              "browserTarget": "angular-training-template:build:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        }
+      },
+      "prefix": "ttpsc",
+      "projectType": "application",
+      "root": "",
+      "schematics": {
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:component": {
+          "inlineStyle": true,
+          "inlineTemplate": true,
+          "skipTests": true,
+          "style": "scss"
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "sourceRoot": "src"
+    }
+  },
+  "version": 1
+}
